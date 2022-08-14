@@ -1,0 +1,20 @@
+{
+  "name": "event_api",
+  "version": "1.0.0",
+  "description": "An API using nodejs and mongoDB library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"nodemon express.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devesh-0419/event_api.git"
+  },
+  "author": "Devesh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devesh-0419/event_api/issues"
+  },
+  "homepage": "https://github.com/devesh-0419/event_api#readme"
+}
