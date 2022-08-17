@@ -7,9 +7,9 @@ const client= require('../index');
 //creating new event
 router.get('/events',async (req,res)=>{
     try {
-
-       console.log('req.query', req.query)
-     if(req.query.id || 0){
+      // let id = req.query
+     // console.log('req.query', id)
+     if(req.query.id){
      //   let projection={};
         let data = await client.client.db("DT").collection("event")
                                                .find({"_id":parseInt(req.query.id)})
@@ -17,10 +17,11 @@ router.get('/events',async (req,res)=>{
                                                .toArray();
         return res.send(data);
      }
-       else{
+    else{
+
         let recency = req.query.type
         if(recency==="latest"){recency =1;}
-        else{recency=0}
+        else{recency=-1}
         let page = parseInt(req.query.page)||0;
         let eventPerPage = parseInt(req.query.limit)||3
         let data = await client.client.db("DT").collection("event")
@@ -81,8 +82,8 @@ router.put('/events/:id',async(req,res)=>{
      const updatedItem={
             $set:req.body,
         };
-        let data = await client.client.db("DT").collection("event").updateOne({"_id":req.params.id},updatedItem);
-        res.send(data);
+        let data = await client.client.db("DT").collection("event").updateOne({"_id":parseInt(req.params.id)},updatedItem);
+        res.json({modified:data.modifiedCount});
     } catch (e) {
         console.error(e)
     }
@@ -93,8 +94,8 @@ router.put('/events/:id',async(req,res)=>{
 
 
 router.delete('/events/:id',async(req,res)=>{
-     
-    let data = await client.client.db("DT").collection("event").deleteOne({"_id":req.params.id});
+     let id = parseInt(req.params.id)
+    let data = await client.client.db("DT").collection("event").deleteOne({"_id":id});
 
     if(data.deletedCount){
         return res.send("Event has been deleted..")
