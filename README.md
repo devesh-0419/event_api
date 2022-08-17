@@ -2,9 +2,9 @@
 
 A nudge creation API. Where you can create nudge for any event.
 ### Postman documentation
-``` 🔗 Links
-[Document](https://documenter.getpostman.com/view/22822443/VUjTiN1w)
-```
+
+ Click Here https://documenter.getpostman.com/view/22822443/VUjTiN1w.
+
 
 
 ## MODEL
