@@ -25,7 +25,7 @@ A nudge creation API. Where you can create nudge for any event.
 
 #### Get event by Id
 
-```http
+```bash
   GET /api/v3/app/events?id=$
 ```
 
@@ -35,7 +35,7 @@ A nudge creation API. Where you can create nudge for any event.
 
 #### Get item by recency and page
 
-```http
+```bash
   GET /api/v3/app/events?type=latest&limit=5&page=1
 ```
 
@@ -46,7 +46,7 @@ A nudge creation API. Where you can create nudge for any event.
 | `page`      | `number` | **Required**. page number |
 
 #### Post item  
-```http
+```bash
   POST /api/v3/app/events
 ```
 #### BODY raw (json)
@@ -75,7 +75,7 @@ A nudge creation API. Where you can create nudge for any event.
 ```
 
 #### Update an item with an id
-```http
+```bash
   PUT /api/v3/app/events/:id
 ```
 
@@ -91,6 +91,6 @@ A nudge creation API. Where you can create nudge for any event.
 
 #### Delete an item with an id
 
-```http
+```bash
   DELETE /api/v3/app/events/:id
 ```
