@@ -1,6 +1,22 @@
 const express=require('express');
 const router=express();
 const client= require('../index');
+const multer = require('multer');
+const path = require('path');
+
+const Storage =  multer.diskStorage({
+    destination: (req, file, cd)=>{
+          cd(null, 'images')
+        },
+    filename: (req, file, cd)=>{
+
+        console.log('file', file);
+cd(null, Date.now()+path.extname(file.originalname));
+ 
+    }
+})
+
+const upload = multer({storage: Storage});
 
 //routes
 
@@ -47,14 +63,17 @@ router.get('/events',async (req,res)=>{
 
 
 
-router.post('/events',async (req,res)=>{
+router.post('/events',upload.single('image'), async (req,res)=>{
     try {
-        let map=req.body
-        let id = req.body.uid;
+       
+        let map=JSON.parse(req.body.body);
+        console.log('req.body', map)
+        let id = map["uid"];
         map["schedule"]=new Date(map["schedule"]);
         delete map["uid"];
         map["_id"]=id;
-
+        map["image"]=req.file.filename;
+console.log('req.file', req.file);
      let data= await client.client.db("DT").collection("event").findOne({"_id":id});
      
 if(data){
@@ -66,7 +85,7 @@ else{
    // console.log('map', map)
     data = await client.client.db("DT").collection("event").insertOne(map);
      
-    return res.status(200).json({"_id" :data.insertedId});
+    return res.status(200).json({"_id" :data});
 }
     
    } catch (e) {
